@@ -1,3 +1,7 @@
+'use client';
+
+import React from 'react';
+import {Button} from 'antd';
 import {ProjectsDisplay} from './components/Projects';
 import {InfoBox} from './components/infobox';
 
@@ -10,38 +14,47 @@ interface Projects {
 }
 
 export default function Home() {
-  const projects: Projects[] = [
-    {
-      name: 'Portfolio',
-      description:
-        'My personal portfolio website built with Next.js and Tailwind CSS.',
-      github: 'https://github.com/leevipun/Portfolio',
-      instagram: '',
-      website: 'https://portfolio-neon-kappa-94.vercel.app/',
-    },
-    {
-      name: 'Habit Tracker',
-      description:
-        'Creating an advanced Habit Tracker using Next.js, TypeScript, and Ant Design, blending tech passion with a dedication to positive habits. A transformative self-improvement project.',
-      github: 'https://github.com/leevipun/Habit-Tracker',
-      instagram: '',
-      website: 'https://courseproject-ten.vercel.app/',
-    },
-    {
-      name: 'E-commarance website',
-      description:
-        'E-commarance website built for a university course project. Made with React, Node.js, Express.js, and MongoDB.',
-      github: 'https://github.com/leevipun/Courseproject',
-      instagram: '',
-      website: 'https://courseproject-ten.vercel.app/',
-    },
-  ];
+  const [title, setTitle] = React.useState<string>('');
+  const [description, setDescription] = React.useState<string>('');
+  const [github, setGithub] = React.useState<string>('');
+  const [instagram, setInstagram] = React.useState<string>('');
+  const [website, setWebsite] = React.useState<string>('');
+  const [stack, setStack] = React.useState<string>('');
+
+  const handleSubmit = async () => {
+    try {
+      const project = {
+        title,
+        description,
+        github,
+        instagram,
+        website,
+        stack,
+      };
+      const res = await fetch('/api/project', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(project),
+      });
+      console.log(res);
+      if (res.status === 201) {
+        setTitle('');
+        setDescription('');
+        setGithub('');
+        setInstagram('');
+        setWebsite('');
+        setStack('');
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <main className='flex flex-col bg-gray-800 overflow-auto'>
       <div className=' bg-gray-800 p-8 text-white h-screen sm:flex'>
         <InfoBox />
-        <ProjectsDisplay projects={projects} />
+        <ProjectsDisplay />
       </div>
     </main>
   );

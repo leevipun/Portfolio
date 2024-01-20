@@ -11,10 +11,10 @@ interface SkillListItems {
 
 export const InfoBox: React.FC = () => {
   const skillList: SkillListItems[] = [
-    {name: 'JavaScript', stars: 4},
-    {name: 'TypeScript', stars: 3},
-    {name: 'React', stars: 4},
-    {name: 'Next.js', stars: 3},
+    {name: 'JavaScript', stars: 3},
+    {name: 'TypeScript', stars: 2},
+    {name: 'React', stars: 3},
+    {name: 'Next.js', stars: 2},
     {name: 'Node.js', stars: 2},
     {name: 'Express.js', stars: 3},
     {name: 'HTML', stars: 4},
@@ -22,14 +22,14 @@ export const InfoBox: React.FC = () => {
   ];
 
   const overAllSkills: SkillListItems[] = [
-    {name: 'Development', stars: 4},
-    {name: 'Design', stars: 3},
-    {name: 'Communication', stars: 4},
-    {name: 'Problem solving', stars: 4},
-    {name: 'Teamwork', stars: 5},
+    {name: 'Development', stars: 3},
+    {name: 'Design', stars: 2},
+    {name: 'Communication', stars: 3},
+    {name: 'Problem solving', stars: 3},
+    {name: 'Teamwork', stars: 4},
     {name: 'Leadership', stars: 3},
-    {name: 'Time management', stars: 4},
-    {name: 'Creativity', stars: 4},
+    {name: 'Time management', stars: 3},
+    {name: 'Creativity', stars: 2},
   ];
 
   const skillListItems = skillList.map((skill) => {
@@ -79,13 +79,13 @@ export const InfoBox: React.FC = () => {
         </p>
       </div>
       <div className='2xl:flex justify-between'>
-        <div className='bg-gray-700 p-6 rounded-md mt-4'>
+        <div className=' bg-gray-700 p-6 rounded-md mt-4'>
           <h2 className='text-2xl font-bold mb-4 mt-4'>Skills</h2>
           <div>
             <ul>{skillListItems}</ul>
           </div>
         </div>
-        <div className='bg-gray-700 p-6 rounded-md mt-4'>
+        <div className='w-1/2 bg-gray-700 p-6 rounded-md mt-4'>
           <h2 className='text-2xl font-bold mb-4 mt-4'>Overall skills</h2>
           <div>
             <ul>{overAllSkillsItems}</ul>
