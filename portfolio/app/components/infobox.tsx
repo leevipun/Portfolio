@@ -1,14 +1,8 @@
 'use client';
 
-import {Button} from 'antd';
 import React from 'react';
-import {
-  FaGithub,
-  FaGlobe,
-  FaInstagram,
-  FaLinkedin,
-  FaStar,
-} from 'react-icons/fa';
+import {FaStar} from 'react-icons/fa';
+import {Socials} from './socials';
 
 interface SkillListItems {
   name: string;
@@ -17,6 +11,8 @@ interface SkillListItems {
 
 export const InfoBox: React.FC = () => {
   const skillList: SkillListItems[] = [
+    {name: 'JavaScript', stars: 4},
+    {name: 'TypeScript', stars: 3},
     {name: 'React', stars: 4},
     {name: 'Next.js', stars: 3},
     {name: 'Node.js', stars: 2},
@@ -25,32 +21,55 @@ export const InfoBox: React.FC = () => {
     {name: 'CSS', stars: 2},
   ];
 
+  const overAllSkills: SkillListItems[] = [
+    {name: 'Development', stars: 4},
+    {name: 'Design', stars: 3},
+    {name: 'Communication', stars: 4},
+    {name: 'Problem solving', stars: 4},
+    {name: 'Teamwork', stars: 5},
+    {name: 'Leadership', stars: 3},
+    {name: 'Time management', stars: 4},
+    {name: 'Creativity', stars: 4},
+  ];
+
   const skillListItems = skillList.map((skill) => {
-    const starList = Array.from({length: skill.stars}, (_, i) => (
+    const filledStars = Array.from({length: skill.stars}, (_, i) => (
       <FaStar key={i} color='yellow' />
     ));
+
+    const emptyStars = Array.from({length: 5 - skill.stars}, (_, i) => (
+      <FaStar key={i + skill.stars} color='grey' />
+    ));
+
     return (
       <li key={skill.name} className='flex mb-2'>
         <p className='mr-5'>{skill.name}</p>
-        {starList}
+        {filledStars}
+        {emptyStars}
       </li>
     );
   });
 
-  const handleRedirectToLinkedIn = () => {
-    window.open('https://www.linkedin.com/in/leevi-puntanen-0a3484298/');
-  };
+  const overAllSkillsItems = overAllSkills.map((skill) => {
+    const filledStars = Array.from({length: skill.stars}, (_, i) => (
+      <FaStar key={i} color='yellow' />
+    ));
 
-  const handleRedirectToGitHub = () => {
-    window.open('https://github.com/leevipun');
-  };
+    const emptyStars = Array.from({length: 5 - skill.stars}, (_, i) => (
+      <FaStar key={i + skill.stars} color='grey' />
+    ));
 
-  const handleRedirectToInstagram = () => {
-    window.open('https://www.instagram.com/__leepu/');
-  };
+    return (
+      <li key={skill.name} className='flex mb-2'>
+        <p className='mr-5'>{skill.name}</p>
+        {filledStars}
+        {emptyStars}
+      </li>
+    );
+  });
 
   return (
-    <div className='w-1/3 min-w-[300px]'>
+    <div className='sm:w-1/3 min-w-[300px]'>
       <h1 className='text-4xl font-bold mb-4'>About me 🚀</h1>
       <div className='bg-gray-700 p-6 rounded-md'>
         <p className='text-lg'>
@@ -59,36 +78,21 @@ export const InfoBox: React.FC = () => {
           a relentless aspiration to excel in the ever-evolving tech industry.
         </p>
       </div>
-      <h2 className='text-2xl font-bold mb-4 mt-4'>Skills </h2>
-      <div className='bg-gray-700 p-6 rounded-md'>
-        <ul>{skillListItems}</ul>
-      </div>
-      <div>
-        <h2 className='text-2xl font-bold mb-4 mt-4'>Socials </h2>
-        <div className='bg-gray-700 p-6 rounded-md'>
-          <div
-            className='flex mb-2 hover:cursor-pointer hover:bg-gray-600 rounded-md mb-2'
-            onClick={handleRedirectToLinkedIn}
-          >
-            <FaLinkedin className='mr-4' size='2em' />
-            <p className='text-lg'>Leevi Puntanen</p>
+      <div className='2xl:flex justify-between'>
+        <div className='bg-gray-700 p-6 rounded-md mt-4'>
+          <h2 className='text-2xl font-bold mb-4 mt-4'>Skills</h2>
+          <div>
+            <ul>{skillListItems}</ul>
           </div>
-          <div
-            className='flex mb-2 hover:cursor-pointer hover:bg-gray-600 rounded-md mb-2'
-            onClick={handleRedirectToGitHub}
-          >
-            <FaGithub className='mr-4' size='2em' />
-            <p className='text-lg'>leevipun</p>
-          </div>
-          <div
-            className='flex hover:cursor-pointer hover:bg-gray-600 rounded-md mb-2'
-            onClick={handleRedirectToInstagram}
-          >
-            <FaInstagram className='mr-4' size='2em' />
-            <p className='text-lg'>__leepu</p>
+        </div>
+        <div className='bg-gray-700 p-6 rounded-md mt-4'>
+          <h2 className='text-2xl font-bold mb-4 mt-4'>Overall skills</h2>
+          <div>
+            <ul>{overAllSkillsItems}</ul>
           </div>
         </div>
       </div>
+      <Socials />
     </div>
   );
 };
