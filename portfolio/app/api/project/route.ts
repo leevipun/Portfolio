@@ -1,6 +1,6 @@
 import connect from '@/app/utils/connection.ts';
 import {NextResponse} from 'next/server';
-import Project from '@/app/models/project.js';
+import Project from '@/app/models/Project.ts';
 
 export const POST = async (req: any) => {
   const {title, description, instagram, github, website, stack} =
