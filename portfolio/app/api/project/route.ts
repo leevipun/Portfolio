@@ -1,4 +1,4 @@
-import Project from '@/app/models/project';
+import Project from '@/app/models/project.js';
 import connect from '@/app/utils/connection.ts';
 import {NextResponse} from 'next/server';
 
