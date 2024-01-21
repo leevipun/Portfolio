@@ -1,8 +1,8 @@
 'use client';
 
 import React from 'react';
-import {ProjectsDisplay} from './components/Projects';
-import {InfoBox} from './components/infobox';
+import {ProjectsDisplay} from './components/Projects.tsx';
+import {InfoBox} from './components/infobox.tsx';
 interface Projects {
   name: string;
   description: string;

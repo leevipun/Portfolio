@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import ServiceCard from '../components/ServiceCard';
+import ServiceCard from '../components/ServiceCard.tsx';
 
 const Services: React.FC = () => {
   return (

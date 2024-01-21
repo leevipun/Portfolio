@@ -2,7 +2,7 @@
 
 import React from 'react';
 import {FaStar} from 'react-icons/fa';
-import {Socials} from './socials';
+import {Socials} from './socials.tsx';
 import {Button, Modal} from 'antd';
 import {Form, Input} from 'antd';
 const {TextArea} = Input;
