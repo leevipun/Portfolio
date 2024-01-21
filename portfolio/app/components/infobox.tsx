@@ -3,6 +3,18 @@
 import React from 'react';
 import {FaStar} from 'react-icons/fa';
 import {Socials} from './socials';
+import {Button, Modal} from 'antd';
+import {Form, Input} from 'antd';
+const {TextArea} = Input;
+const {confirm} = Modal;
+import {MouseEventHandler} from 'react';
+import Link from 'next/link';
+
+type FieldType = {
+  Email?: string;
+  Name?: string;
+  Subject?: string;
+};
 
 interface SkillListItems {
   name: string;
@@ -10,6 +22,34 @@ interface SkillListItems {
 }
 
 export const InfoBox: React.FC = () => {
+  const [open, setOpen] = React.useState<boolean>(false);
+  const [name, setName] = React.useState<string>('');
+  const [email, setEmail] = React.useState<string>('');
+  const [subject, setSubject] = React.useState<string>('');
+
+  const handleOk = async () => {
+    try {
+      const response = await fetch('/api/email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({name, email, subject}),
+      });
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+      Modal.destroyAll();
+      setOpen(false);
+      Modal.success({
+        content: 'Email sent!',
+        footer: <Button onClick={() => Modal.destroyAll()}>Ok</Button>,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const skillList: SkillListItems[] = [
     {name: 'JavaScript', stars: 3},
     {name: 'TypeScript', stars: 2},
@@ -68,6 +108,52 @@ export const InfoBox: React.FC = () => {
     );
   });
 
+  const showModal = () => {
+    Modal.confirm({
+      title: 'Contact form',
+      content: (
+        <Form
+          name='basic'
+          labelCol={{span: 8}}
+          wrapperCol={{span: 16}}
+          style={{padding: 20, backgroundColor: 'white'}}
+          initialValues={{remember: true}}
+          autoComplete='off'
+        >
+          <Form.Item<FieldType>
+            label='Email'
+            name='Email'
+            rules={[
+              {
+                required: true,
+                message: 'Please input valid email!',
+                type: 'email',
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item<FieldType>
+            label='Name'
+            name='Name'
+            rules={[{required: true, message: 'Please input your Name!'}]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item<FieldType>
+            name='Subject'
+            label='Subject'
+            rules={[{required: true, message: 'Please input your subject!'}]}
+          >
+            <TextArea />
+          </Form.Item>
+        </Form>
+      ),
+      footer: <Button onClick={handleOk}>Submit</Button>,
+    });
+  };
+
   return (
     <div className='sm:w-1/3 min-w-[300px]'>
       <h1 className='text-4xl font-bold mb-4'>About me 🚀</h1>
@@ -77,6 +163,38 @@ export const InfoBox: React.FC = () => {
           Secondary School, driven by an unwavering passion for programming and
           a relentless aspiration to excel in the ever-evolving tech industry.
         </p>
+        <div>
+          <Button
+            className='bg-blue-700 mt-4'
+            type='primary'
+            shape='round'
+            size='large'
+            onClick={showModal}
+          >
+            Contact
+          </Button>
+          <Button
+            className='bg-blue-700 mt-4 ml-4'
+            type='primary'
+            shape='round'
+            size='large'
+          >
+            <a
+              href='https://drive.google.com/file/d/1eL2GgLNxu9VCd6lToE6jBt5c2nshBNh_/view'
+              target='_blank'
+            >
+              Resume
+            </a>
+          </Button>
+          <Button
+            className='bg-blue-700 mt-4 ml-4'
+            type='primary'
+            shape='round'
+            size='large'
+          >
+            <Link href='/services'>Services</Link>
+          </Button>
+        </div>
       </div>
       <div className='2xl:flex justify-between'>
         <div className=' bg-gray-700 p-6 rounded-md mt-4'>
@@ -85,7 +203,7 @@ export const InfoBox: React.FC = () => {
             <ul>{skillListItems}</ul>
           </div>
         </div>
-        <div className='w-1/2 bg-gray-700 p-6 rounded-md mt-4'>
+        <div className='2xl:w-1/2 bg-gray-700 p-6 rounded-md mt-4'>
           <h2 className='text-2xl font-bold mb-4 mt-4'>Overall skills</h2>
           <div>
             <ul>{overAllSkillsItems}</ul>

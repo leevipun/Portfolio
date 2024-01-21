@@ -5,7 +5,7 @@ import {FaGithub, FaGlobe, FaInstagram} from 'react-icons/fa';
 import {Button} from 'antd';
 
 interface Projects {
-  name: string;
+  title: string;
   description: string;
   github: string;
   instagram: string;
@@ -14,6 +14,7 @@ interface Projects {
 
 export const ProjectsDisplay: React.FC = ({}) => {
   const [projects, setProjects] = React.useState<Projects[] | null>(null);
+
   useEffect(() => {
     const getProjectsData = async () => {
       const projects = (await fetch('/api/project', {
@@ -28,7 +29,7 @@ export const ProjectsDisplay: React.FC = ({}) => {
   const projectListItems = projects ? (
     projects.map((project) => (
       <div key={project.title} className='bg-gray-700 p-6 rounded-md ml-4 mt-4'>
-        <h2 className='text-2xl font-bold m-4'>{project.name}</h2>
+        <h2 className='text-2xl font-bold m-4'>{project.title}</h2>
         <p className='text-lg mb-4'>{project.description}</p>
         <Button
           className='mr-4 bg-purple-700 mt-4'
