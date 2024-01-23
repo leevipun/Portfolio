@@ -13,6 +13,7 @@ const transporter = nodemailer.createTransport({
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
+    console.log(body);
 
     const mailData = {
       from: 'nordicexchange@outlook.com',

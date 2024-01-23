@@ -2,7 +2,8 @@
 
 import React, {useEffect} from 'react';
 import {FaGithub, FaGlobe, FaInstagram} from 'react-icons/fa';
-import {Button} from 'antd';
+import {Button, Spin} from 'antd';
+import {LoadingOutlined} from '@ant-design/icons';
 
 interface Projects {
   title: string;
@@ -14,14 +15,26 @@ interface Projects {
 
 export const ProjectsDisplay: React.FC = ({}) => {
   const [projects, setProjects] = React.useState<Projects[] | null>(null);
+  const [loading, setLoading] = React.useState<boolean>(false);
 
   useEffect(() => {
     const getProjectsData = async () => {
-      const projects = (await fetch('/api/project', {
-        method: 'GET',
-      }).then((res) => res.json())) as Projects[];
-      console.log(projects);
-      setProjects(projects);
+      setLoading(true);
+      try {
+        const response = await fetch('/api/project', {
+          method: 'GET',
+        });
+        if (!response.ok) {
+          throw new Error('Failed to fetch projects data');
+        }
+        const projects = (await response.json()) as Projects[];
+        console.log(projects);
+        setProjects(projects);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
     };
     getProjectsData();
   }, []);
@@ -43,17 +56,6 @@ export const ProjectsDisplay: React.FC = ({}) => {
           Github
         </Button>
         <Button
-          className='mr-4 bg-purple-700 mt-4'
-          type='primary'
-          shape='round'
-          icon={<FaInstagram />}
-          size='large'
-          href={project.instagram}
-          target='_blank'
-        >
-          Post
-        </Button>
-        <Button
           className='bg-blue-700 mt-4'
           type='primary'
           shape='round'
@@ -64,6 +66,21 @@ export const ProjectsDisplay: React.FC = ({}) => {
         >
           Visit the website
         </Button>
+        <Spin
+          spinning={loading}
+          fullscreen
+          tip='Loading...'
+          indicator={
+            <LoadingOutlined
+              style={{
+                fontSize: 24,
+              }}
+              spin
+            />
+          }
+        >
+          <div className='content' />
+        </Spin>
       </div>
     ))
   ) : (
@@ -72,9 +89,24 @@ export const ProjectsDisplay: React.FC = ({}) => {
     </div>
   );
   return (
-    <div className='sm:w-2/3 min-w-[300px]'>
+    <div className='sm:w-2/3 min-w-[300px] min-h-screen 2xl:overflow-auto'>
       <h1 className='text-4xl font-bold mb-4'>Projects 🚀</h1>
       <div className='bg-gray-800 p-6 rounded-md'>{projectListItems}</div>
+      <Spin
+        spinning={loading}
+        fullscreen
+        tip='Loading...'
+        indicator={
+          <LoadingOutlined
+            style={{
+              fontSize: 24,
+            }}
+            spin
+          />
+        }
+      >
+        <div className='content' />
+      </Spin>
     </div>
   );
 };

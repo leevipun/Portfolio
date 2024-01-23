@@ -186,14 +186,6 @@ export const InfoBox: React.FC = () => {
               Resume
             </a>
           </Button>
-          <Button
-            className='bg-blue-700 mt-4 ml-4'
-            type='primary'
-            shape='round'
-            size='large'
-          >
-            <Link href='/services'>Services</Link>
-          </Button>
         </div>
       </div>
       <div className='2xl:flex justify-between'>

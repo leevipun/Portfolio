@@ -6,9 +6,9 @@ interface formData {
   message: string;
 }
 
-export function sendContactMail(data: formData) {
+export async function sendContactMail(data: formData) {
   try {
-    fetch('/api/email', {
+    await fetch('/api/email', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
