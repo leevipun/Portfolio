@@ -59,14 +59,6 @@ const ServiceCard: React.FC = () => {
       href: 'calc/pwd',
     },
     {
-      title: 'SEO Optimization',
-      description:
-        "Improve your website's visibility on search engines with effective SEO strategies. I will optimize your content, meta tags, and site structure for better search engine rankings.",
-      price: 'Starting from $200',
-      maintenance: '$30/month',
-      href: '/calc/seo', // Corrected property name to "href"
-    },
-    {
       title: 'Customer Management System (CRM)',
       description:
         'Streamline your customer interactions and boost relationships with a tailored CRM solution. I design and implement customer management systems using robust technologies like Salesforce, HubSpot, or a custom-built solution. Manage leads, track interactions, and enhance customer satisfaction with personalized CRM features. Customize the CRM to align with your business processes and goals.',
