@@ -6,9 +6,6 @@ import {Socials} from './socials.tsx';
 import {Button, Modal} from 'antd';
 import {Form, Input} from 'antd';
 const {TextArea} = Input;
-const {confirm} = Modal;
-import {MouseEventHandler} from 'react';
-import Link from 'next/link';
 
 type FieldType = {
   Email?: string;
@@ -51,11 +48,11 @@ export const InfoBox: React.FC = () => {
   };
 
   const skillList: SkillListItems[] = [
-    {name: 'JavaScript', stars: 3},
-    {name: 'TypeScript', stars: 2},
-    {name: 'React', stars: 3},
-    {name: 'Next.js', stars: 2},
-    {name: 'Node.js', stars: 2},
+    {name: 'JavaScript', stars: 4},
+    {name: 'TypeScript', stars: 3},
+    {name: 'React', stars: 4},
+    {name: 'Next.js', stars: 3},
+    {name: 'Node.js', stars: 3},
     {name: 'Express.js', stars: 3},
     {name: 'HTML', stars: 4},
     {name: 'CSS', stars: 2},
@@ -69,7 +66,7 @@ export const InfoBox: React.FC = () => {
     {name: 'Teamwork', stars: 4},
     {name: 'Leadership', stars: 3},
     {name: 'Time management', stars: 3},
-    {name: 'Creativity', stars: 2},
+    {name: 'Creativity', stars: 3},
   ];
 
   const skillListItems = skillList.map((skill) => {
@@ -159,9 +156,13 @@ export const InfoBox: React.FC = () => {
       <h1 className='text-4xl font-bold mb-4'>About me 🚀</h1>
       <div className='bg-gray-700 p-6 rounded-md'>
         <p className='text-lg'>
-          A dynamic 17-year-old student currently enrolled at Kulosaari Upper
-          Secondary School, driven by an unwavering passion for programming and
-          a relentless aspiration to excel in the ever-evolving tech industry.
+          Hi, I&apos;m Leevi, a 17-year-old tech enthusiast and student at
+          Kulosaari Upper Secondary School. Currently, I&apos;m engaged in
+          personal tech projects and actively seeking opportunities as a junior
+          full stack developer. Described as hardworking, motivated, and quick
+          to learn, I bring dedication, diligence, and effective communication
+          to any team. I&apos;m excited about the prospect of contributing to
+          your organization and eager to discuss potential collaborations.
         </p>
         <div>
           <Button
