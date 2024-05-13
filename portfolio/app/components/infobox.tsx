@@ -1,11 +1,22 @@
 'use client';
 
 import React from 'react';
-import {FaStar} from 'react-icons/fa';
-import {Socials} from './socials.tsx';
-import {Button, Modal} from 'antd';
-import {Form, Input} from 'antd';
-const {TextArea} = Input;
+import {
+  FaStar,
+  FaReact,
+  FaNodeJs,
+  FaHtml5,
+  FaCss3Alt,
+  FaJs,
+  FaCode,
+  FaPuzzlePiece,
+  FaUsers,
+  FaClock,
+  FaLightbulb,
+  FaComments,
+} from 'react-icons/fa';
+import { Socials } from './socials.tsx';
+import { Button } from 'antd';
 
 type FieldType = {
   Email?: string;
@@ -14,168 +25,62 @@ type FieldType = {
 };
 
 interface SkillListItems {
+  icon: JSX.Element;
   name: string;
   stars: number;
 }
 
 export const InfoBox: React.FC = () => {
-  const [open, setOpen] = React.useState<boolean>(false);
-  const [name, setName] = React.useState<string>('');
-  const [email, setEmail] = React.useState<string>('');
-  const [subject, setSubject] = React.useState<string>('');
-
-  const handleOk = async () => {
-    try {
-      const response = await fetch('/api/email', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({name, email, subject}),
-      });
-      if (!response.ok) {
-        throw new Error(response.statusText);
-      }
-      Modal.destroyAll();
-      setOpen(false);
-      Modal.success({
-        content: 'Email sent!',
-        footer: <Button onClick={() => Modal.destroyAll()}>Ok</Button>,
-      });
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   const skillList: SkillListItems[] = [
-    {name: 'JavaScript', stars: 4},
-    {name: 'TypeScript', stars: 3},
-    {name: 'React', stars: 4},
-    {name: 'Next.js', stars: 3},
-    {name: 'Node.js', stars: 3},
-    {name: 'Express.js', stars: 3},
-    {name: 'HTML', stars: 4},
-    {name: 'CSS', stars: 2},
+    { icon: <FaJs />, name: 'JavaScript', stars: 4 },
+    { icon: <FaReact />, name: 'React', stars: 3 },
+    { icon: <FaNodeJs />, name: 'Node.js', stars: 3 },
+    { icon: <FaHtml5 />, name: 'HTML', stars: 4 },
+    { icon: <FaCss3Alt />, name: 'CSS', stars: 2 },
   ];
 
   const overAllSkills: SkillListItems[] = [
-    {name: 'Development', stars: 3},
-    {name: 'Design', stars: 2},
-    {name: 'Communication', stars: 3},
-    {name: 'Problem solving', stars: 3},
-    {name: 'Teamwork', stars: 4},
-    {name: 'Leadership', stars: 3},
-    {name: 'Time management', stars: 3},
-    {name: 'Creativity', stars: 3},
+    { icon: <FaCode />, name: 'Development', stars: 3 },
+    { icon: <FaPuzzlePiece />, name: 'Design', stars: 2 },
+    { icon: <FaComments />, name: 'Communication', stars: 3 },
+    { icon: <FaPuzzlePiece />, name: 'Problem solving', stars: 3 },
+    { icon: <FaUsers />, name: 'Teamwork', stars: 4 },
+    { icon: <FaPuzzlePiece />, name: 'Leadership', stars: 3 },
+    { icon: <FaClock />, name: 'Time management', stars: 3 },
+    { icon: <FaLightbulb />, name: 'Creativity', stars: 3 },
   ];
 
-  const skillListItems = skillList.map((skill) => {
-    const filledStars = Array.from({length: skill.stars}, (_, i) => (
+  const renderStars = (stars: number) => {
+    const filledStars = Array.from({ length: stars }, (_, i) => (
       <FaStar key={i} color='yellow' />
     ));
-
-    const emptyStars = Array.from({length: 5 - skill.stars}, (_, i) => (
-      <FaStar key={i + skill.stars} color='grey' />
+    const emptyStars = Array.from({ length: 5 - stars }, (_, i) => (
+      <FaStar key={i + stars} color='gray' />
     ));
-
     return (
-      <li key={skill.name} className='flex mb-2'>
-        <p className='mr-5'>{skill.name}</p>
+      <>
         {filledStars}
         {emptyStars}
-      </li>
+      </>
     );
-  });
-
-  const overAllSkillsItems = overAllSkills.map((skill) => {
-    const filledStars = Array.from({length: skill.stars}, (_, i) => (
-      <FaStar key={i} color='yellow' />
-    ));
-
-    const emptyStars = Array.from({length: 5 - skill.stars}, (_, i) => (
-      <FaStar key={i + skill.stars} color='grey' />
-    ));
-
-    return (
-      <li key={skill.name} className='flex mb-2'>
-        <p className='mr-5'>{skill.name}</p>
-        {filledStars}
-        {emptyStars}
-      </li>
-    );
-  });
-
-  const showModal = () => {
-    Modal.confirm({
-      title: 'Contact form',
-      content: (
-        <Form
-          name='basic'
-          labelCol={{span: 8}}
-          wrapperCol={{span: 16}}
-          style={{padding: 20, backgroundColor: 'white'}}
-          initialValues={{remember: true}}
-          autoComplete='off'
-        >
-          <Form.Item<FieldType>
-            label='Email'
-            name='Email'
-            rules={[
-              {
-                required: true,
-                message: 'Please input valid email!',
-                type: 'email',
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-
-          <Form.Item<FieldType>
-            label='Name'
-            name='Name'
-            rules={[{required: true, message: 'Please input your Name!'}]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item<FieldType>
-            name='Subject'
-            label='Subject'
-            rules={[{required: true, message: 'Please input your subject!'}]}
-          >
-            <TextArea />
-          </Form.Item>
-        </Form>
-      ),
-      footer: <Button onClick={handleOk}>Submit</Button>,
-    });
   };
 
   return (
     <div className='sm:w-1/3 min-w-[300px]'>
       <h1 className='text-4xl font-bold mb-4'>About me 🚀</h1>
-      <div className='bg-gray-700 p-6 rounded-md'>
+      <div className='bg-gray-900 p-6 rounded-md text-white'>
         <p className='text-lg'>
-          Hi, I&apos;m Leevi, a 17-year-old tech enthusiast and student at
-          Kulosaari Upper Secondary School. Currently, I&apos;m engaged in
-          personal tech projects and actively seeking opportunities as a junior
-          full stack developer. Described as hardworking, motivated, and quick
-          to learn, I bring dedication, diligence, and effective communication
-          to any team. I&apos;m excited about the prospect of contributing to
-          your organization and eager to discuss potential collaborations.
+          Hi, I'm Leevi, a 17-year-old tech enthusiast and student at Kulosaari
+          Upper Secondary School. Currently, I'm engaged in personal tech
+          projects and actively seeking opportunities as a junior full stack
+          developer. Described as hardworking, motivated, and quick to learn, I
+          bring dedication, diligence, and effective communication to any team.
+          I'm excited about the prospect of contributing to your organization
+          and eager to discuss potential collaborations.
         </p>
-        <div>
+        <div className='mt-6'>
           <Button
-            className='bg-blue-700 mt-4'
-            type='primary'
-            shape='round'
-            size='large'
-            onClick={showModal}
-          >
-            Contact
-          </Button>
-          <Button
-            className='bg-blue-700 mt-4 ml-4'
+            className='bg-blue-700'
             type='primary'
             shape='round'
             size='large'
@@ -183,27 +88,46 @@ export const InfoBox: React.FC = () => {
             <a
               href='https://drive.google.com/file/d/1eL2GgLNxu9VCd6lToE6jBt5c2nshBNh_/view'
               target='_blank'
+              rel='noopener noreferrer'
             >
               Resume
             </a>
           </Button>
         </div>
       </div>
-      <div className='2xl:flex justify-between'>
-        <div className=' bg-gray-700 p-6 rounded-md mt-4'>
-          <h2 className='text-2xl font-bold mb-4 mt-4'>Skills</h2>
-          <div>
-            <ul>{skillListItems}</ul>
-          </div>
+      <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6'>
+        <div className='bg-gray-900 p-6 rounded-md text-white'>
+          <h2 className='text-2xl font-bold mb-4'>Skills</h2>
+          <ul>
+            {skillList.map((skill, index) => (
+              <li
+                key={index}
+                className='flex items-center justify-between mb-2'
+              >
+                {React.cloneElement(skill.icon, { title: skill.name })}
+                {renderStars(skill.stars)}
+              </li>
+            ))}
+          </ul>
         </div>
-        <div className='2xl:w-1/2 bg-gray-700 p-6 rounded-md mt-4'>
-          <h2 className='text-2xl font-bold mb-4 mt-4'>Overall skills</h2>
-          <div>
-            <ul>{overAllSkillsItems}</ul>
-          </div>
+        <div className='bg-gray-900 p-6 rounded-md text-white'>
+          <h2 className='text-2xl font-bold mb-4'>Overall skills</h2>
+          <ul>
+            {overAllSkills.map((skill, index) => (
+              <li
+                key={index}
+                className='flex items-center justify-between mb-2'
+              >
+                {React.cloneElement(skill.icon, { title: skill.name })}
+                {renderStars(skill.stars)}
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
       <Socials />
     </div>
   );
 };
+
+export default InfoBox;

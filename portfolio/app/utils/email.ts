@@ -1,4 +1,4 @@
-import {NextResponse} from 'next/server';
+import { NextResponse } from 'next/server';
 
 interface formData {
   name: string;
@@ -15,8 +15,16 @@ export async function sendContactMail(data: formData) {
       },
       body: JSON.stringify(data),
     });
-    return new NextResponse('Email sent', {status: 200});
+    return new NextResponse('Email sent', { status: 200 });
   } catch (err) {
-    return new NextResponse('Email sending failed', {status: 500});
+    return new NextResponse('Email sending failed', { status: 500 });
   }
 }
+
+export const checkEnviorment = () => {
+  let baseUrl =
+    process.env.NODE_ENV === 'development'
+      ? 'http://localhost:3000'
+      : 'https://portfolio-website-phi.vercel.app';
+  return baseUrl;
+};
