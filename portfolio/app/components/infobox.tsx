@@ -66,63 +66,64 @@ export const InfoBox: React.FC = () => {
   };
 
   return (
-    <div className='sm:w-1/3 min-w-[300px]'>
-      <h1 className='text-4xl font-bold mb-4'>About me 🚀</h1>
-      <div className='bg-gray-900 p-6 rounded-md text-white'>
-        <p className='text-lg'>
-          Hi, I'm Leevi, a 17-year-old tech enthusiast and student at Kulosaari
-          Upper Secondary School. Currently, I'm engaged in personal tech
-          projects and actively seeking opportunities as a junior full stack
-          developer. Described as hardworking, motivated, and quick to learn, I
-          bring dedication, diligence, and effective communication to any team.
-          I'm excited about the prospect of contributing to your organization
-          and eager to discuss potential collaborations.
-        </p>
-        <div className='mt-6'>
-          <Button
-            className='bg-blue-700'
-            type='primary'
-            shape='round'
-            size='large'
-          >
-            <a
-              href='https://drive.google.com/file/d/1eL2GgLNxu9VCd6lToE6jBt5c2nshBNh_/view'
-              target='_blank'
-              rel='noopener noreferrer'
-            >
-              Resume
-            </a>
-          </Button>
-        </div>
-      </div>
-      <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6'>
-        <div className='bg-gray-900 p-6 rounded-md text-white'>
-          <h2 className='text-2xl font-bold mb-4'>Skills</h2>
-          <ul>
-            {skillList.map((skill, index) => (
-              <li
-                key={index}
-                className='flex items-center justify-between mb-2'
+    <div className='container mx-auto px-4 lg:px-0'>
+      <div className='grid grid-cols-1 lg:grid-cols-3 gap-8'>
+        <div className='lg:col-span-2'>
+          <div className='bg-gray-900 p-8 rounded-md text-white'>
+            <h1 className='text-4xl font-bold mb-6 text-center lg:text-left'>
+              About me 🚀
+            </h1>
+            <p className='text-lg'>
+              Hi, I&apos;m Leevi, a 17-year-old tech enthusiast and student at
+              Kulosaari Upper Secondary School. Currently, I&apos;m engaged in
+              personal tech projects and actively seeking opportunities as a
+              junior full stack developer. Described as hardworking, motivated,
+              and quick to learn, I bring dedication, diligence, and effective
+              communication to any team. I&apos;m excited about the prospect of
+              contributing to your organization and eager to discuss potential
+              collaborations.
+            </p>
+            <div className='mt-8 text-center lg:text-left'>
+              <a
+                href='https://drive.google.com/file/d/1eL2GgLNxu9VCd6lToE6jBt5c2nshBNh_/view'
+                target='_blank'
+                rel='noopener noreferrer'
+                className='inline-block bg-blue-700 text-white py-3 px-8 rounded-md text-lg hover:bg-blue-600 transition duration-300 ease-in-out'
               >
-                {React.cloneElement(skill.icon, { title: skill.name })}
-                {renderStars(skill.stars)}
-              </li>
-            ))}
-          </ul>
+                Resume
+              </a>
+            </div>
+          </div>
         </div>
-        <div className='bg-gray-900 p-6 rounded-md text-white'>
-          <h2 className='text-2xl font-bold mb-4'>Overall skills</h2>
-          <ul>
-            {overAllSkills.map((skill, index) => (
-              <li
-                key={index}
-                className='flex items-center justify-between mb-2'
-              >
-                {React.cloneElement(skill.icon, { title: skill.name })}
-                {renderStars(skill.stars)}
-              </li>
-            ))}
-          </ul>
+        <div>
+          <div className='bg-gray-900 p-8 rounded-md text-white'>
+            <h2 className='text-2xl font-bold mb-6'>Skills</h2>
+            <ul>
+              {skillList.map((skill, index) => (
+                <li
+                  key={index}
+                  className='flex items-center justify-between mb-4'
+                >
+                  {React.cloneElement(skill.icon, { title: skill.name })}
+                  {renderStars(skill.stars)}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className='bg-gray-900 p-8 rounded-md text-white mt-8 lg:mt-0'>
+            <h2 className='text-2xl font-bold mb-6'>Overall skills</h2>
+            <ul>
+              {overAllSkills.map((skill, index) => (
+                <li
+                  key={index}
+                  className='flex items-center justify-between mb-4'
+                >
+                  {React.cloneElement(skill.icon, { title: skill.name })}
+                  {renderStars(skill.stars)}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
       <Socials />
