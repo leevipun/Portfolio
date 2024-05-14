@@ -94,9 +94,10 @@ export const InfoBox: React.FC = () => {
               </a>
             </div>
           </div>
+          <Socials />
         </div>
         <div>
-          <div className='bg-gray-900 p-8 rounded-md text-white'>
+          <div className='bg-gray-900 p-8 mb-8 rounded-md text-white'>
             <h2 className='text-2xl font-bold mb-6'>Skills</h2>
             <ul>
               {skillList.map((skill, index) => (
@@ -126,7 +127,6 @@ export const InfoBox: React.FC = () => {
           </div>
         </div>
       </div>
-      <Socials />
     </div>
   );
 };

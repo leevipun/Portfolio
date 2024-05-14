@@ -1,5 +1,5 @@
 import { Form, Input } from 'antd';
-import ContactForm from '../components/contactForm';
+import ContactForm from '../contactForm';
 const { TextArea } = Input;
 
 export default function Contact() {

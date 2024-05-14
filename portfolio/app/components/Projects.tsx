@@ -5,15 +5,7 @@ import { FaGithub, FaGlobe, FaInstagram } from 'react-icons/fa';
 import { Button, Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 
-interface Projects {
-  title: string;
-  description: string;
-  github: string;
-  instagram: string;
-  website: string;
-}
-
-export const ProjectsDisplay: React.FC = ({ projects }: any) => {
+export const ProjectsDisplay = ({ projects }: { projects: any }) => {
   const projectListItems = projects ? (
     projects.map((project: any) => (
       <div key={project.title} className='bg-gray-700 p-6 rounded-md ml-4 mt-4'>
