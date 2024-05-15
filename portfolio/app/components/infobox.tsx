@@ -25,29 +25,30 @@ type FieldType = {
 };
 
 interface SkillListItems {
-  icon: JSX.Element;
   name: string;
   stars: number;
 }
 
 export const InfoBox: React.FC = () => {
   const skillList: SkillListItems[] = [
-    { icon: <FaJs />, name: 'JavaScript', stars: 4 },
-    { icon: <FaReact />, name: 'React', stars: 3 },
-    { icon: <FaNodeJs />, name: 'Node.js', stars: 3 },
-    { icon: <FaHtml5 />, name: 'HTML', stars: 4 },
-    { icon: <FaCss3Alt />, name: 'CSS', stars: 2 },
+    { name: 'JavaScript', stars: 4 },
+    { name: 'React', stars: 3 },
+    { name: 'Node.js', stars: 3 },
+    { name: 'MongoDB', stars: 3 },
+    { name: 'TypeScript', stars: 3 },
+    { name: 'HTML', stars: 4 },
+    { name: 'CSS', stars: 2 },
   ];
 
   const overAllSkills: SkillListItems[] = [
-    { icon: <FaCode />, name: 'Development', stars: 3 },
-    { icon: <FaPuzzlePiece />, name: 'Design', stars: 2 },
-    { icon: <FaComments />, name: 'Communication', stars: 3 },
-    { icon: <FaPuzzlePiece />, name: 'Problem solving', stars: 3 },
-    { icon: <FaUsers />, name: 'Teamwork', stars: 4 },
-    { icon: <FaPuzzlePiece />, name: 'Leadership', stars: 3 },
-    { icon: <FaClock />, name: 'Time management', stars: 3 },
-    { icon: <FaLightbulb />, name: 'Creativity', stars: 3 },
+    { name: 'Development', stars: 3 },
+    { name: 'Design', stars: 2 },
+    { name: 'Communication', stars: 3 },
+    { name: 'Problem solving', stars: 3 },
+    { name: 'Teamwork', stars: 4 },
+    { name: 'Leadership', stars: 3 },
+    { name: 'Time management', stars: 3 },
+    { name: 'Creativity', stars: 3 },
   ];
 
   const renderStars = (stars: number) => {
@@ -105,7 +106,7 @@ export const InfoBox: React.FC = () => {
                   key={index}
                   className='flex items-center justify-between mb-4'
                 >
-                  {React.cloneElement(skill.icon, { title: skill.name })}
+                  <span className='skill-name'>{skill.name}</span>
                   {renderStars(skill.stars)}
                 </li>
               ))}
@@ -119,7 +120,7 @@ export const InfoBox: React.FC = () => {
                   key={index}
                   className='flex items-center justify-between mb-4'
                 >
-                  {React.cloneElement(skill.icon, { title: skill.name })}
+                  <span className='skill-name'>{skill.name}</span>
                   {renderStars(skill.stars)}
                 </li>
               ))}

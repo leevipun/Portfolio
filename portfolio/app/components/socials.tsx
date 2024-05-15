@@ -1,5 +1,5 @@
 import React from 'react';
-import {FaGithub, FaInstagram, FaLinkedin} from 'react-icons/fa';
+import { FaGithub, FaInstagram, FaLinkedin } from 'react-icons/fa';
 
 export const Socials: React.FC = () => {
   const handleRedirectToLinkedIn = () => {
@@ -16,7 +16,7 @@ export const Socials: React.FC = () => {
   return (
     <div className='mb-4'>
       <h2 className='text-2xl font-bold mb-4 mt-4'>Socials </h2>
-      <div className='bg-gray-700 p-6 rounded-md'>
+      <div className='bg-gray-900 p-6 rounded-md'>
         <div
           className='flex mb-2 hover:cursor-pointer hover:bg-gray-600 rounded-md mb-2 p-2'
           onClick={handleRedirectToLinkedIn}
