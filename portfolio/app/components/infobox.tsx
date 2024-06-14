@@ -24,7 +24,7 @@ const overAllSkills = [
 ];
 
 // Helper function to render stars
-const renderStars = (stars) => (
+const renderStars = (stars: any) => (
   <Rate 
     disabled 
     defaultValue={stars} 
@@ -32,14 +32,14 @@ const renderStars = (stars) => (
   />
 );
 
-const SkillCard = ({ title, skills }) => (
+const SkillCard = ({ title, skills }: {title: any, skills: any}) => (
   <Card
     title={<h2 className="text-2xl font-bold text-white mb-6">{title}</h2>}
     className="bg-black-100 text-white p-6 rounded-lg shadow-lg transition-all duration-300"
     bordered={false}
   >
     <ul>
-      {skills.map((skill, index) => (
+      {skills.map((skill: any, index: any) => (
         <li
           key={index}
           className="flex items-center justify-between mb-4"
